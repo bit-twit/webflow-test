@@ -3,12 +3,25 @@
       xmlns="http://www.springframework.org/schema/webflow"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.springframework.org/schema/webflow
-                          http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+                          http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd"
+      >
 
-    <view-state id="gws1" view="gws-landing-page">
+    <action-state id="action1">
+        <evaluate expression="gwsFlowHelper.step1()" />
+        <transition to="gws1View"/>
+    </action-state>
+
+    <view-state id="gws1View" view="gws-landing-page">
+        <transition on="nextStep" to="action2"/>
     </view-state>
 
-    <view-state id="gws2" view="gws-form-page">
+    <action-state id="action2">
+        <evaluate expression="gwsFlowHelper.step2()" />
+        <transition to="gws2View"/>
+    </action-state>
+
+    <view-state id="gws2View" view="gws-form-page">
+        <transition on="nextStep" to="end"/>
     </view-state>
 
     <end-state id="end"/>
