@@ -5,18 +5,27 @@
       xsi:schemaLocation="http://www.springframework.org/schema/webflow
                           http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 
-	<decision-state id="chooseSubflow">
+    <action-state id="chooseSubflow">
 		<evaluate expression="lgsFlowHelper.getSubFlowIdByCampaign(externalContext.nativeRequest)" result="flowScope.subFlowName" />
-        <transition to="${flowScope.subFlowName}"/>
-    </decision-state>
+        <transition to="#{flowScope.subFlowName}"/>
+    </action-state>
 
+<!-- 
     <subflow-state id="rms" subflow="rms">
-    	<transition to="end" />
+    	<transition on="end" to="endLgsFlow" />
     </subflow-state>
 
-    <subflow-state id="lgs" subflow="lgs">
-    	<transition to="end" />
+    <subflow-state id="gws" subflow="gws">
+    	<transition on="end" to="endLgsFlow" />
     </subflow-state>
+-->
+    <view-state id="gws" view="gws-landing-page">
+        <transition on="nextStep" to="endLgsFlow"/>
+    </view-state>
 
-	<end-state id="end"/>
+    <view-state id="rms" view="rms-landing-page">
+        <transition on="nextStep" to="endLgsFlow"/>
+    </view-state>
+
+	<end-state id="endLgsFlow"/>
 </flow>

@@ -53,7 +53,7 @@
 
     <bean id="defaultFlowRegistry" class="org.bittwit.webflow.ShopFlowDefinitionRegistry">
         <property name="flowBuilderServices" ref="flowBuilderServices"/>
-        <property name="contextRelativeFlowPath" value="/WEB-INF/lgs.xml"/>
+        <property name="contextRelativeFlowPath" value="/WEB-INF/flows/lgs.xml"/>
     </bean>
 
     <webflow:flow-registry id="flowRegistry"

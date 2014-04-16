@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<flow parent="_parent"
+<flow
       xmlns="http://www.springframework.org/schema/webflow"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.springframework.org/schema/webflow
@@ -10,4 +10,6 @@
 
     <view-state id="gws2" view="gws-form-page">
     </view-state>
+
+    <end-state id="end"/>
 </flow>
