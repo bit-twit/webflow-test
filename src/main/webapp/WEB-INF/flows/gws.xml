@@ -5,6 +5,9 @@
       xsi:schemaLocation="http://www.springframework.org/schema/webflow
                           http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 
-    <view-state id="index_gws">
+    <view-state id="gws1" view="gws-landing-page">
+    </view-state>
+
+    <view-state id="gws2" view="gws-form-page">
     </view-state>
 </flow>

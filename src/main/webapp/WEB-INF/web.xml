@@ -21,7 +21,7 @@
  
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>/WEB-INF/mvc-dispatcher-servlet.xml,/WEB-INF/webflow.xml</param-value>
+        <param-value>/WEB-INF/mvc-dispatcher-servlet.xml</param-value>
     </context-param>
 
     <listener>

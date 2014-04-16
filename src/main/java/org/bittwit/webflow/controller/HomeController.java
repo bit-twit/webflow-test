@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
  
 @Controller
-@RequestMapping("/")
 public class HomeController {
 
     private static Map<String, String> urls = new HashMap<String, String>();
@@ -22,12 +21,8 @@ public class HomeController {
         urls.put("/gws-campaign", "/gws/gws-campaign");
     }
 
-    @RequestMapping(value="/?", method = RequestMethod.GET)
+    @RequestMapping(value="/", method = RequestMethod.GET)
     public String campaign(ModelMap model, HttpServletRequest request) {
- 
-        String requestUrl = request.getRequestURL().toString();
-        requestUrl.replace(request.getPathInfo(), "");
-        model.addAttribute("message", "Maven Web Project + Spring 3 MVC - welcome()");
  
         //Spring uses InternalResourceViewResolver and return back index.jsp
         return "index";

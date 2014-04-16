@@ -1,22 +1,92 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
     xmlns:context="http://www.springframework.org/schema/context"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:webflow="http://www.springframework.org/schema/webflow-config"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:p="http://www.springframework.org/schema/p"
     xsi:schemaLocation="
-        http://www.springframework.org/schema/beans     
+        http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-        http://www.springframework.org/schema/context 
-        http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+        http://www.springframework.org/schema/webflow-config
+        http://www.springframework.org/schema/webflow-config/spring-webflow-config-2.3.xsd">
  
     <context:component-scan base-package="org.bittwit.webflow.controller" />
- 
-    <bean
-        class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix">
-            <value>/WEB-INF/pages/</value>
-        </property>
-        <property name="suffix">
-            <value>.jsp</value>
+
+     <mvc:annotation-driven/>
+
+	<bean
+    	class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter">
+	</bean>
+
+    <bean id="tilesConfigurer"
+          class="org.springframework.web.servlet.view.tiles2.TilesConfigurer"
+          p:definitions="/WEB-INF/tiles-defs/templates.xml" />
+
+    <bean id="tilesViewResolver"
+          class="org.springframework.web.servlet.view.UrlBasedViewResolver"
+          p:viewClass="org.springframework.web.servlet.view.tiles2.TilesView"
+         />
+
+    <!-- Setup Web Flow here -->
+	<bean id="urlMapping"
+		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<value>
+                /?*/**=flowController
+                /?*/**/=flowController
+			</value>
+		</property>
+		<property name="alwaysUseFullPath" value="true" />
+	</bean>
+
+	<bean id="flowController" class="org.springframework.webflow.mvc.servlet.FlowController">
+		<property name="flowExecutor" ref="flowExecutor" />
+		<property name="flowUrlHandler">
+			<bean
+				class="org.springframework.webflow.context.servlet.DefaultFlowUrlHandler" />
+		</property>
+	</bean>
+
+    <bean id="defaultFlowRegistry" class="org.bittwit.webflow.ShopFlowDefinitionRegistry">
+        <property name="flowBuilderServices" ref="flowBuilderServices"/>
+        <property name="contextRelativeFlowPath" value="/WEB-INF/lgs.xml"/>
+    </bean>
+
+    <webflow:flow-registry id="flowRegistry"
+        flow-builder-services="flowBuilderServices" parent="defaultFlowRegistry">
+        <!-- webflow:flow-location path="/WEB-INF/flow.xml" /-->
+    </webflow:flow-registry>
+
+    <webflow:flow-executor id="flowExecutor" />
+
+    <!-- Plugs in a custom creator for Web Flow views -->
+    <webflow:flow-builder-services id="flowBuilderServices" view-factory-creator="mvcViewFactoryCreator" />
+
+    <!-- Configures Web Flow to use Tiles to create views for rendering; Tiles allows for applying consistent layouts to your views -->
+    <bean id="mvcViewFactoryCreator"
+          class="org.springframework.webflow.mvc.builder.MvcViewFactoryCreator">
+        <property name="viewResolvers">
+            <list>
+                <ref bean="tilesViewResolver"/>
+            </list>
         </property>
     </bean>
- 
+    
+  	<!-- beans -->
+  	  <!-- Used in action-state of Flow -->
+    <bean id="lgsFlowHelper" 
+          class="org.bittwit.webflow.helper.LgsFlowHelper" 
+          scope="prototype" />
+
+    <bean id="rmsFlowHelper" 
+          class="org.bittwit.webflow.helper.RmsFlowHelper" 
+          scope="prototype" />
+
+    <bean id="gwsFlowHelper" 
+          class="org.bittwit.webflow.helper.GwsFlowHelper" 
+          scope="prototype" />
 </beans>

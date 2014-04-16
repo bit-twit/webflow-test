@@ -5,6 +5,9 @@
       xsi:schemaLocation="http://www.springframework.org/schema/webflow
                           http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 
-    <view-state id="index_rms">
+    <view-state id="rms1" view="rms-landing-page">
+    </view-state>
+
+    <view-state id="rms2" view="rms-form-page">
     </view-state>
 </flow>

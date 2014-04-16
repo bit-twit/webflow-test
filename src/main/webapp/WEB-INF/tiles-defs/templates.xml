@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+	<definition name="error.base.definition" template="/WEB-INF/pages/error-layout.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="header" value="" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="" />
+	</definition>
+	<definition name="base.definition" template="/WEB-INF/pages/layout.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="header" value="/WEB-INF/pages/header.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="" />
+	</definition>
+
+	<definition name="index" extends="base.definition">
+		<put-attribute name="title" value="LGS: Index page" />
+		<put-attribute name="body" value="/WEB-INF/pages/index.jsp" />
+	</definition>
+
+	<definition name="rms-landing-page" extends="base.definition">
+		<put-attribute name="title" value="LGS: RMS Landing page" />
+		<put-attribute name="body" value="/WEB-INF/pages/rms_landing_page.jsp" />
+	</definition>
+
+	<definition name="rms-form-page" extends="base.definition">
+		<put-attribute name="title" value="LGS: RMS Form page" />
+		<put-attribute name="body" value="/WEB-INF/pages/rms_form_page.jsp" />
+	</definition>
+
+	<definition name="gws-landing-page" extends="base.definition">
+		<put-attribute name="title" value="LGS: GWS Landing page" />
+		<put-attribute name="body" value="/WEB-INF/pages/lgs_landing_page.jsp" />
+	</definition>
+
+	<definition name="gws-form-page" extends="base.definition">
+		<put-attribute name="title" value="LGS: GWS Form page" />
+		<put-attribute name="body" value="/WEB-INF/pages/lgs_form_page.jsp" />
+	</definition>
+</tiles-definitions>
