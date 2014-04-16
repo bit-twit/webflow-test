@@ -2,10 +2,14 @@ package org.bittwit.webflow;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.webflow.context.servlet.DefaultFlowUrlHandler;
 import org.springframework.webflow.core.collection.AttributeMap;
 
 public class FlexibleContextPathFlowUrlHandler extends DefaultFlowUrlHandler {
+
+    @Value("${webflow.redirect.useContextPath}")
+    private boolean useContextPathOnRedirect = true;
 
     @Override
     public String createFlowDefinitionUrl(String flowId, AttributeMap input, HttpServletRequest request) {
@@ -18,8 +22,13 @@ public class FlexibleContextPathFlowUrlHandler extends DefaultFlowUrlHandler {
     }
 
     protected String cleanUrl(String url, HttpServletRequest request) {
-        String pattern = request.getContextPath();
-        return url.replaceFirst(pattern, "");
+        String finalUrl = url;
+        if (!this.useContextPathOnRedirect) {
+            System.out.println("WARN: Removing contextPath on redirect.");
+            String pattern = request.getContextPath();
+            finalUrl = url.replaceFirst(pattern, "");
+        }
+        return finalUrl;
     }
 
 }

@@ -18,9 +18,9 @@
 
      <mvc:annotation-driven/>
 
-	<bean
-    	class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter">
-	</bean>
+    <context:property-placeholder location="classpath:webflow-test.properties"/>
+
+	<bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"/>
 
     <bean id="tilesConfigurer"
           class="org.springframework.web.servlet.view.tiles2.TilesConfigurer"
