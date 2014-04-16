@@ -37,7 +37,6 @@
 		<property name="mappings">
 			<value>
                 /?*/**=flowController
-                /?*/**/=flowController
 			</value>
 		</property>
 		<property name="alwaysUseFullPath" value="true" />
@@ -47,7 +46,7 @@
 		<property name="flowExecutor" ref="flowExecutor" />
 		<property name="flowUrlHandler">
 			<bean
-				class="org.springframework.webflow.context.servlet.DefaultFlowUrlHandler" />
+				class="org.bittwit.webflow.FlexibleContextPathFlowUrlHandler" />
 		</property>
 	</bean>
 
@@ -75,7 +74,7 @@
             </list>
         </property>
     </bean>
-    
+
   	<!-- beans -->
   	  <!-- Used in action-state of Flow -->
     <bean id="lgsFlowHelper" 
