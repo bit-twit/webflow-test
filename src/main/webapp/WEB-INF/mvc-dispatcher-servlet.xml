@@ -50,14 +50,9 @@
 		</property>
 	</bean>
 
-    <bean id="defaultFlowRegistry" class="org.bittwit.webflow.ShopFlowDefinitionRegistry">
-        <property name="flowBuilderServices" ref="flowBuilderServices"/>
-        <property name="contextRelativeFlowPath" value="/WEB-INF/flows/lgs.xml"/>
-    </bean>
-
     <webflow:flow-registry id="flowRegistry"
-        flow-builder-services="flowBuilderServices" parent="defaultFlowRegistry">
-        <!-- webflow:flow-location path="/WEB-INF/flow.xml" /-->
+        flow-builder-services="flowBuilderServices">
+        <webflow:flow-location-pattern value="/WEB-INF/flows/*.xml" />
     </webflow:flow-registry>
 
     <webflow:flow-executor id="flowExecutor" />

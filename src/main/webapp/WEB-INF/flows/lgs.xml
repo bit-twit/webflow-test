@@ -10,7 +10,6 @@
         <transition to="#{flowScope.subFlowName}"/>
     </action-state>
 
-<!-- 
     <subflow-state id="rms" subflow="rms">
     	<transition on="end" to="endLgsFlow" />
     </subflow-state>
@@ -18,7 +17,8 @@
     <subflow-state id="gws" subflow="gws">
     	<transition on="end" to="endLgsFlow" />
     </subflow-state>
--->
+
+<!--
     <view-state id="gws" view="gws-landing-page">
         <transition on="nextStep" to="endLgsFlow"/>
     </view-state>
@@ -26,6 +26,7 @@
     <view-state id="rms" view="rms-landing-page">
         <transition on="nextStep" to="endLgsFlow"/>
     </view-state>
+-->
 
-	<end-state id="endLgsFlow"/>
+	<end-state id="endLgsFlow" view="lgs-end-page"/>
 </flow>

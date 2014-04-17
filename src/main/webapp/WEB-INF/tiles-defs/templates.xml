@@ -40,4 +40,9 @@
 		<put-attribute name="title" value="LGS: GWS Form page" />
 		<put-attribute name="body" value="/WEB-INF/pages/gws/gws_form_page.jsp" />
 	</definition>
+	
+	<definition name="lgs-end-page" extends="base.definition">
+		<put-attribute name="title" value="LGS: End page" />
+		<put-attribute name="body" value="/WEB-INF/pages/lgs_end_page.jsp" />
+	</definition>
 </tiles-definitions>

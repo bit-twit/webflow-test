@@ -8,8 +8,37 @@ import org.springframework.webflow.core.collection.AttributeMap;
 
 public class FlexibleContextPathFlowUrlHandler extends DefaultFlowUrlHandler {
 
-    @Value("${webflow.redirect.useContextPath}")
+    @Value("${webflow.include.context.path.on.redirect}")
     private boolean useContextPathOnRedirect = true;
+    @Value("${webflow.main.flow.id}")
+    private String mainFlowId;
+
+    @Override
+	public String getFlowId(HttpServletRequest request) {
+		/*String pathInfo = request.getPathInfo();
+		if (pathInfo != null) {
+			return pathInfo.substring(1);
+		} else {
+			String servletPath = request.getServletPath();
+			if (StringUtils.hasText(servletPath)) {
+				int dotIndex = servletPath.lastIndexOf('.');
+				if (dotIndex != -1) {
+					return servletPath.substring(1, dotIndex);
+				} else {
+					return servletPath.substring(1);
+				}
+			} else {
+				String contextPath = request.getContextPath();
+				if (StringUtils.hasText(contextPath)) {
+					return request.getContextPath().substring(1);
+				} else {
+					return null;
+				}
+			}
+		}*/
+    	System.out.println("returning lgs main flow------------ " + this.mainFlowId);
+    	return this.mainFlowId;
+	}
 
     @Override
     public String createFlowDefinitionUrl(String flowId, AttributeMap input, HttpServletRequest request) {
